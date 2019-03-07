@@ -3,6 +3,7 @@ import pdb
 import re
 import os
 from google.cloud import translate
+#set GOOGLE_APPLICATION_CREDENTIALS=./credentials.json
 
 reddit = praw.Reddit('bilingual_bot')
 subreddit = reddit.subreddit("canadapolitics")
@@ -32,7 +33,7 @@ else:
         posts_replied_to = list(filter(None, posts_replied_to))
 
 
-for submission in subreddit.new(limit=3):
+for submission in subreddit.new(limit=1):
     if submission.id not in posts_replied_to:
         reply = '**' + translate(submission.title) + '**' + '\n\n' + translate(submission.selftext)
         submission.reply(reply)
